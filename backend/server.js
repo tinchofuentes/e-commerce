@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 
 const app = express();
 
@@ -9,11 +10,12 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware para parsear JSON
 app.use(express.json());
-
+ // Middleware para logs de peticiones
+app.use(morgan('dev'));
 // Habilitar CORS temporalmente sin restricciones
 app.use(cors());
 
-// Ruta de prueba
+// Endpoint de prueba
 app.get('/ping', (req, res) => {
     res.send('pong');
 });
