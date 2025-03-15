@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const authMiddleware = (req, res, next) => {
+const verifyToken = (req, res, next) => {
     let token = req.header('Authorization');
 
     if (!token) {
@@ -14,11 +14,19 @@ const authMiddleware = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded; // Adjunta los datos del usuario al request
+        req.user = decoded; // Adjunta los datos del usuario a la request
         next();
     } catch (error) {
         return res.status(401).json({ message: 'Token inválido.' });
     }
 };
 
-module.exports = authMiddleware;
+// isAdmin to handle products
+const isAdmin = (req, res, next) => {
+    if (!req.user || req.user.role !== "admin") {
+        return res.status(403).json({ message: "Acceso denegado. Se requieren permisos de administrador." });
+    }
+    next();
+};
+
+module.exports = { verifyToken, isAdmin};

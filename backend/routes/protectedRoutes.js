@@ -1,9 +1,9 @@
 const express = require('express');
-const authMiddleware = require('../middlewares/authMiddleware');
+const { verifyToken } = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
-router.get('/profile', authMiddleware, (req, res) => {
+router.get('/profile', verifyToken, (req, res) => {
     res.json({ message: 'Accediste a una ruta protegida', user: req.user });
 });
 

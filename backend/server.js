@@ -15,16 +15,13 @@ app.use(morgan('dev'));
 // Configurar CORS adecuadamente
 app.use(cors({ origin: '*' }));
 
+// Definir las diferentes rutas de la api
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/protected', require('./routes/protectedRoutes'));
+app.use('/api/products', require('./routes/productRoutes'));
 
 // Probar conexión a la base de datos
 testConnection();
-
-// Endpoint de prueba
-app.get('/ping', (req, res) => {
-    res.send('pong');
-});
 
 // Definir el puerto
 const PORT = process.env.PORT || 5000;
