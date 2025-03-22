@@ -1,4 +1,3 @@
-// const { Product } = require("../models");
 const Product = require('../models/Product');
 
 // Obtener todos los productos
@@ -8,6 +7,22 @@ const getProducts = async (req, res) => {
         res.json(products);
     } catch (error) {
         res.status(500).json({ message: "Error al obtener productos", error });
+    }
+};
+
+// Obtener un producto por su ID
+const getProductById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByPk(id);
+
+        if (!product) {
+            return res.status(404).json({ message: "Producto no encontrado" });
+        }
+
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ message: "Error al obtener producto", error });
     }
 };
 
@@ -57,4 +72,4 @@ const deleteProduct = async (req, res) => {
     }
 };
 
-module.exports = { getProducts, createProduct, updateProduct, deleteProduct };
+module.exports = { getProducts, getProductById, createProduct, updateProduct, deleteProduct };

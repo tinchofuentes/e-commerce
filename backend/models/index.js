@@ -8,11 +8,11 @@ const OrderDetails = require("./OrderDetails");
 User.hasMany(Order, { foreignKey: "userId" });
 Order.belongsTo(User, { foreignKey: "userId" });
 
-Order.hasMany(OrderDetails, { foreignKey: "orderId" });
-OrderDetails.belongsTo(Order, { foreignKey: "orderId" });
+Order.hasMany(OrderDetails, { foreignKey: "orderId", onDelete: "CASCADE", onUpdate: "CASCADE" });
+OrderDetails.belongsTo(Order, { foreignKey: "orderId", onDelete: "CASCADE", onUpdate: "CASCADE" });
 
-Product.hasMany(OrderDetails, { foreignKey: "productId" });
-OrderDetails.belongsTo(Product, { foreignKey: "productId" });
+Product.hasMany(OrderDetails, { foreignKey: "productId", onDelete: "CASCADE", onUpdate: "CASCADE" });
+OrderDetails.belongsTo(Product, { foreignKey: "productId", onDelete: "CASCADE", onUpdate: "CASCADE" });
 
 module.exports = {
   sequelize,

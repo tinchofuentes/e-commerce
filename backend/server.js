@@ -19,6 +19,7 @@ app.use(cors({ origin: '*' }));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/protected', require('./routes/protectedRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
+app.use('/api/orders', require('./routes/orderRoutes'));
 
 // Probar conexión a la base de datos
 testConnection();
