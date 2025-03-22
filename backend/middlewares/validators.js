@@ -1,7 +1,7 @@
 const { body } = require('express-validator');
 
 const userValidationRules = [
-  body('nombre').notEmpty().withMessage('El nombre es obligatorio').isLength({ min: 3 }).withMessage('El nombre debe tener al menos 3 caracteres'),
+  body('nombre').notEmpty().withMessage('El nombre es obligatorio').isLength({ min: 5 }).withMessage('El nombre debe tener al menos 5 caracteres'),
   body('email').isEmail().withMessage('El email debe ser válido'),
   body('contraseña').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres')
     .matches(/[A-Z]/).withMessage('La contraseña debe tener al menos una letra mayúscula')

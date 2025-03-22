@@ -1,4 +1,6 @@
 const express = require('express');
+const { orderValidationRules } = require('../middlewares/validators');
+const { validate } = require('express-validator');
 const { verifyToken, isAdmin } = require('../middlewares/authMiddleware');
 const {
     createOrder,
@@ -11,7 +13,13 @@ const {
 const router = express.Router();
 
 // Crear una nueva orden
-router.post('/', verifyToken, createOrder);
+router.post('/', verifyToken, orderValidationRules, validate, (req, res, next) => {
+    // Si hay errores de validación, detendremos el flujo y responderemos con los errores
+    if (req.errors) {
+        return res.status(400).json({ errors: req.errors });
+    }
+    next();
+}, createOrder);
 
 // Obtener todas las órdenes de un usuario
 router.get('/', verifyToken, getOrders);
