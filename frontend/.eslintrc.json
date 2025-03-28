@@ -13,7 +13,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": ["error", { "endOfLine": "lf" }],
     "react/prop-types": "off",
     "no-console": "warn",
     "eqeqeq": "error",
